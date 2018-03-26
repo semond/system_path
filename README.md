@@ -30,3 +30,7 @@ If:
 - you set suffix to `/Users/myname/bin`,
 
 then the final path will become `/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/myname/bin`.
+
+# License
+
+MIT. Do whatever you want with this.

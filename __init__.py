@@ -1,7 +1,7 @@
-"""No desc.
+"""Simple Blender addon to add path to the PATH environment variable.
 
 :copyright: (c) 2018, Serge Emond
-:license: BSD
+:license: MIT License
 
 """
 
@@ -36,6 +36,7 @@ class SystemPathApply(bpy.types.Operator):
     bl_description = "Apply the system path's configuration"
 
     def execute(self, context):
+        """Execute the operator."""
         user_preferences = context.user_preferences
         addon_prefs = user_preferences.addons[__name__].preferences
 
@@ -62,9 +63,7 @@ class SystemPathReset(bpy.types.Operator):
     bl_description = "Reset the original system path"
 
     def execute(self, context):
-        user_preferences = context.user_preferences
-        addon_prefs = user_preferences.addons[__name__].preferences
-
+        """Execute the operator."""
         if State.original_path:
             os.environ['PATH'] = State.original_path
             State.original_path = None
@@ -73,6 +72,8 @@ class SystemPathReset(bpy.types.Operator):
 
 
 class SystemPathPreferences(bpy.types.AddonPreferences):
+    """Preference pane for the System Path addon."""
+
     bl_idname = __name__
 
     prepath = StringProperty(
@@ -85,6 +86,7 @@ class SystemPathPreferences(bpy.types.AddonPreferences):
     )
 
     def draw(self, context):
+        """Draw the preference pane."""
         layout = self.layout
         layout.label(
             text="Separate items with semi-colon (':'). "
@@ -97,21 +99,21 @@ class SystemPathPreferences(bpy.types.AddonPreferences):
 
 
 @persistent
-def _init(context):
-    # bpy.app.handlers.scene_update_pre.remove(_init_scene)
-    # bpy.app.handlers.load_post.remove(_init)
-
+def initialize(context):
+    """Once Blender is ready, apply the changes to the system path."""
     bpy.ops.systempath.apply()
 
 
 def register():
+    """Register the addon."""
     bpy.utils.register_class(SystemPathPreferences)
     bpy.utils.register_class(SystemPathApply)
     bpy.utils.register_class(SystemPathReset)
-    bpy.app.handlers.load_post.append(_init)
+    bpy.app.handlers.load_post.append(initialize)
 
 
 def unregister():
+    """Unregister the addon."""
     bpy.ops.systempath.reset()
     bpy.utils.unregister_class(SystemPathPreferences)
     bpy.utils.unregister_class(SystemPathApply)
