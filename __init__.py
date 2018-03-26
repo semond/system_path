@@ -14,7 +14,7 @@ from bpy.props import StringProperty
 bl_info = {
     'name': 'System Path',
     'author': 'Serge Émond',
-    'version': (0, 1),
+    'version': (0, 2),
     'blender': (2, 79, 0),
     'description': "Add paths to the system's path",
     'category': 'System',
@@ -45,9 +45,10 @@ class SystemPathApply(bpy.types.Operator):
             State.original_path = os.environ.get('PATH', '')
 
         if addon_prefs.prepath:
-            os.environ['PATH'] = addon_prefs.prepath + ':' + os.environ['PATH']
+            os.environ['PATH'] = (
+                addon_prefs.prepath + os.pathsep + os.environ['PATH'])
         if addon_prefs.postpath:
-            os.environ['PATH'] += ':' + addon_prefs.postpath
+            os.environ['PATH'] += os.pathsep + addon_prefs.postpath
 
         return {"FINISHED"}
 
