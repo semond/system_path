@@ -12,6 +12,13 @@ You should probably search for other methods to globally set your path instead. 
 sudo launchctl config user path <user_path_setting>
 ```
 
+# Installation
+
+Click "Clone or download", then "Download ZIP", then use "Install Add-on from File…"in Blender’s preferences.
+
+Or clone the repository in your "add_ons" directory.
+
+
 # Usage
 
 Install the add-on, then set a prefix and/or a suffix using the preferences.
