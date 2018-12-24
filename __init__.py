@@ -14,8 +14,8 @@ from bpy.props import StringProperty
 bl_info = {
     'name': 'System Path',
     'author': 'Serge Émond',
-    'version': (0, 2),
-    'blender': (2, 79, 0),
+    'version': (0, 3),
+    'blender': (2, 80, 0),
     'description': "Add paths to the system's path",
     'category': 'System',
 }

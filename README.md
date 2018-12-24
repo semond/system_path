@@ -18,7 +18,6 @@ Click "Clone or download", then "Download ZIP", then use "Install Add-on from Fi
 
 Or clone the repository in your "add_ons" directory.
 
-
 # Usage
 
 Install the add-on, then set a prefix and/or a suffix using the preferences.
@@ -30,6 +29,24 @@ If:
 - you set suffix to `/Users/myname/bin`,
 
 then the final path will become `/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/myname/bin`.
+
+# Blender 2.79
+
+The current version works on Blender 2.80.
+
+If you need this on Blender 2.79, either get an older revision, or open the file `__init__.py` and change line 18 from:
+
+```
+    'blender': (2, 80, 0),
+```
+
+to
+
+```
+    'blender': (2, 79, 0),
+```
+
+Then restart Blender or click “refresh” in the Add-on preferences. It should now activate.
 
 # License
 
